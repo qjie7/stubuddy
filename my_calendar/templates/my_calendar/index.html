@@ -1,0 +1,44 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+<h2>Set your Schedules</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+<!-- django-bootstrap4 manages form errors automatically -->
+<!-- {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif%} -->
+
+<form method="post" class="form">
+    {% csrf_token %}
+
+    <!-- insert bootstrap style rules into the form's individual elements as the form is rendered -->
+    {% bootstrap_form form%}
+
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+
+</form>
+
+{% endblock content %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Calendar</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_ul}}
+        <input class="btn btn-default" type="submit" value="Submit" />
+    </form>
+</body>
+</html> -->

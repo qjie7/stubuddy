@@ -1,0 +1,24 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+<h1 class="text-center text-danger">Topics</h1>
+{% endblock page_header %}
+
+{% block content %}
+
+<ul class="list-group">
+    {% for topic in topics %}
+    <a href="{% url 'learning_logs:topic' topic.id %}" class="list-group-item list-group-item-action">{{ topic }}</a>
+    {% empty %}
+        <h2>No topics have been added yet</h2>
+    {% endfor %}
+
+    {% buttons %}
+    <div class="text-center">
+        <a href="{% url 'learning_logs:new_topic' %}"> <button name="submit" class="btn btn-primary mt-3">Add a new topic</button></a>
+    </div>
+    
+    {% endbuttons %}
+
+{% endblock content %}

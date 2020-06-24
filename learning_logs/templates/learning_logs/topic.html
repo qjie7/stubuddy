@@ -1,0 +1,46 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+<h1 class="text-center">{{ topic }}</h1>
+{% endblock page_header %}
+
+{% block content %}
+
+
+<ul>
+    {% for entry in entries %}
+    <div class="card mb-3">
+        <h4 class="card-header">
+            <!-- '|'' represents a template filter in Django - a function that modifies the value in a template variable. -->
+            <div>{{ entry.date_added|date:'M d, Y H:i' }} <a href="{% url 'learning_logs:edit_entry' entry.id %}"
+                    class="btn-sm btn-secondary " tabindex="-1" role="button" aria-disabled="true">Edit entry</a></div>
+
+
+
+        </h4>
+        <div class="card-body">
+            <!-- The filter linebreaks ensures that long text entries include line breaks in a format understand by browser
+                rather than showing a block of uninterrupted text -->
+            {{ entry.text|linebreaks }}
+
+        </div>
+
+    </div>
+
+    {% empty %}
+    <p>There are no entries for this topic yet.</p>
+    {% endfor %}
+</ul>
+
+<div class="text-center">
+
+
+    <a href="{% url 'learning_logs:new_entry' topic.id %}" class="btn btn-primary btn-lg " tabindex="-1" role="button"
+        aria-disabled="true">Add new entry</a>
+
+
+</div>
+
+
+{% endblock content %}

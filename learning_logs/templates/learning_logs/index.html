@@ -1,0 +1,44 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<div class="jumbotron">
+    <h1 class="display-3 ">Buddy for Study</h1>
+
+    <p class="lead">Stubuddy is a study companion for your learning needs. 
+        <ul>
+            <li>
+                <h4>Make your own Learning Log, and keep a list of the topics you're learning about. Whenever you learn
+                    something new about a topic, make an entry summarizing what you've learned.</h4>
+            </li>
+
+            <li>
+                <h4>Get organized and plan for your upcoming schedules with Set Schedule function and refer back using Calendar</h4>
+            </li>
+
+            <li>
+               <h4>Get bored? Try change to Dark mode and get refreshed!</h4> 
+            </li>
+        </ul>
+        
+    </p>
+    {% if not user.is_authenticated %}
+    <div class="text-center ">
+        <a class="btn btn-lg btn-primary mt-4" href="{% url 'users:register' %}" role="button">
+            Register &raquo;
+        </a>
+    </div>
+    
+    {% else %}
+    <div class="text-center">
+        <a class="btn btn-lg btn-primary text-center  mt-4" href="{% url 'learning_logs:new_topic' %}" role="button">
+            Add Topic &raquo;
+        </a>
+
+        <a class="btn btn-lg btn-info text-center  mt-4 ml-3" href="{% url 'my_calendar:add_event' %}" role="button">
+            Set Schedule &raquo;
+        </a>
+    </div>
+    
+    {% endif %}
+</div>
+{% endblock page_header %}

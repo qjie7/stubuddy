@@ -1,0 +1,173 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Learning Log</title>
+
+    {% bootstrap_css %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            font-family: "Poppins", sans-serif;
+        }
+
+        input[type="checkbox"] {
+
+            position: fixed;
+            z-index: 1;
+            top: 1%;
+            right: 54%;
+            cursor: pointer;
+            -webkit-appearance: none;
+
+        }
+
+        input[type="checkbox"]:before {
+
+            content: 'Dark';
+            position: absolute;
+            color: #fff;
+            background-color: #000;
+            padding: 10px 20px;
+        }
+
+
+
+        input[type="checkbox"]:checked:before {
+            content: 'Light';
+            color: #000;
+            background: #fff;
+
+        }
+
+        input[type="checkbox"]:checked~* {
+
+            filter: invert(1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        #top,
+        #calendar.fc-unthemed {
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+        }
+
+        #top {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            padding: 0 10px;
+            line-height: 40px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        #top .selector {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #top select {
+            font: inherit;
+            /* mock what Boostrap does, don't compete  */
+        }
+
+        .left {
+            float: left
+        }
+
+        .right {
+            float: right
+        }
+
+        .clear {
+            clear: both
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 10px;
+        }
+    </style>
+    {% bootstrap_javascript jquery='full' %}
+
+</head>
+
+<body>
+
+
+    <input type="checkbox" name="">
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+
+        <a class="navbar-brand" href="{% url 'learning_logs:index'%}">Stubuddy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'learning_logs:topics' %}">Topics</a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'my_calendar:view' %}">Calendar</a>
+
+                </li>
+
+
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text">Hello, {{ user.username }}.</span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </nav>
+
+    <main role="main" class="container">
+        <div class="pb-2 mb-2">
+            {% block page_header %}{% endblock page_header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+
+
+</body>
+
+</html>

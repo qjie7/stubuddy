@@ -1,0 +1,29 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<h2 class="text-center text-danger">
+    <a href="{% url 'learning_logs:topic' topic.id %}"> {{ topic }}</a>
+</h2>
+<p>Add a new entry:</p>
+<!-- action -> tells the browser where to send the data submitted in the form
+    in this case, send it back to view function new_topic() -->
+<form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
+
+    <!-- Prevent attackers from using the form to gain unauthorized access to the server (cross-site request forgery) -->
+    {% csrf_token %}
+
+    <!-- 'as_p' modifier tells Django to render all the form elements in paragraph format
+        as a simple way to display the form neatly -->
+    {% bootstrap_form form%}
+
+    <!-- But Django doesn't auto create a submit button for forms -->
+    <div class="text-center">
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">Add entry</button>
+        {% endbuttons %}
+    </div>
+
+
+</form>
+{% endblock content %}
