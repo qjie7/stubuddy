@@ -1,3 +1,3 @@
-# stubuddy[https://stubuddy.herokuapp.com/]
+# [stubuddy](https://stubuddy.herokuapp.com/)
 
 
